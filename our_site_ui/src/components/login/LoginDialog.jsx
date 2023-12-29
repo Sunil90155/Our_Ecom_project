@@ -1,5 +1,12 @@
+
+
 import { Box, Dialog, TextField, Typography, styled, Button } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+import { authenticateSignup,authenticateLogin } from '../../service/api';
+import { DataContext } from '../../context/DataProvider';
+
+
 
 
 
@@ -59,6 +66,8 @@ const Wrapper = styled(Box)`
 `;
 
 
+
+
 const Image = styled(Box)`
     background: #17827d url(https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_c4a81e.png) center 85% no-repeat;
     width: 30%;
@@ -98,10 +107,23 @@ const signupInitialValues = {
 };
 
 
+const loginInitialValues = {
+    username: '',
+    password: ''
+};
+
+
 const LoginDailog = ({ open, setOpen }) => {
 
     const [account, toggleAccount] = useState(accountInitialValues.login)
     const [signup, setsignup] = useState(signupInitialValues);
+    const [login, setLogin] = useState(loginInitialValues);
+    const [ showError ] = useState(false);
+
+    const { setAccount } = useContext(DataContext);
+
+
+    
 
     const handleClose = () => {
         setOpen(false);
@@ -120,13 +142,35 @@ const LoginDailog = ({ open, setOpen }) => {
 
     }
 
-    const signupUser = async() => {
-       
+    const signupUser = async () => {
+        let response = await authenticateSignup(signup);
+        if (!response) return; // ager response nahii aata ahi yahi se return maar dena hai 
+        handleClose();
+        console.log(response);
+        setAccount(signup.firstname);
+
     }
 
 
+    const onValueChange = (e) => {
+        setLogin({ ...login, [e.target.name]: e.target.value });
+    }
 
 
+    const loginUser = async() => {
+        let response = await authenticateLogin(login);
+       
+        if(response.status===200) {
+            handleClose();
+            setAccount(response.data.data.firstname);
+        }
+
+        else{
+
+                
+        }
+            
+    }
 
 
     return (
@@ -143,10 +187,13 @@ const LoginDailog = ({ open, setOpen }) => {
                         account.view === 'login' ?
                             <Wrapper>
 
-                                <TextField variant="standard" label="Enter Enter Email/Mobile Number" />
-                                <TextField variant="standard" label="Enter Password" />
+                                <TextField variant="standard" onChange={(e) => onValueChange(e)} name='username' label="Enter Enter Email/Mobile Number" />
+                                
+                                <TextField variant="standard" onChange={(e) => onValueChange(e)} name='password' label="Enter Password" />
+
                                 <Text>By continuting , You agree to Our_site terms And Privicy Policy. </Text>
-                                <LoginButton> Login  </LoginButton>
+
+                                <LoginButton onClick={() => loginUser()} >Login</LoginButton>
                                 <Typography style={{ textAlign: 'center' }}  >OR</Typography>
                                 <RequestOTP>Requst OPT</RequestOTP>
                                 <CreateAccount onClick={() => toggleSignup()} >If U R New On Our Site ? Create Account Hare </CreateAccount>
@@ -163,7 +210,7 @@ const LoginDailog = ({ open, setOpen }) => {
                                 <TextField variant="standard" onChange={(e) => onInputChange(e)} name='email' label="Enter Email" />
                                 <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label="Enter Passwaord" />
                                 <TextField variant="standard" onChange={(e) => onInputChange(e)} name='phone' label="Enter Phone" />
-                                <LoginButton onClick={() => signupUser ()} > Continue Login  </LoginButton>
+                                <LoginButton onClick={() => signupUser()} > Continue Login  </LoginButton>
                             </Wrapper>
 
                     }
