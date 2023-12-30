@@ -118,7 +118,7 @@ const LoginDailog = ({ open, setOpen }) => {
     const [account, toggleAccount] = useState(accountInitialValues.login)
     const [signup, setsignup] = useState(signupInitialValues);
     const [login, setLogin] = useState(loginInitialValues);
-    const [ showError ] = useState(false);
+    //const [ showError ] = useState(false);
 
     const { setAccount } = useContext(DataContext);
 
