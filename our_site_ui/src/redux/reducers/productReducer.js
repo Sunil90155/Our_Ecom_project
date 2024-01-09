@@ -14,23 +14,29 @@ export const getProductsReducer = (state = { products: [] }, action) => {
     }
 }
 
-export const getProductDetailsReducer = (state = { product: {} }, action) => {
+export const getProductDetailsReducer = ( state = { product: {} }, action) => {
     switch (action.type) {
 
         case actionTypes.GET_PRODUCT_DETAILS_REQUEST:
-            return { loading: true }
+            return { loading: false }
 
         case actionTypes.GET_PRODUCT_DETAILS_SUCCESS:
-            return { loading: false, product: action.payload }
+                console.log("Now its true i am in pr-DETAILS_SUCCESS")
+            return { loading : false , product : action.payload }
             
-        case actionTypes.GET_PRODUCT_DETAILS_FAIL:
+        case actionTypes.GET_PRODUCT_DETAILS_FAIL:   //kisi wajah se ager api fail ho jati hai  
+            console.log("Now its true i am in pr2")
             return { loading: false, error: action.payload }
 
         case actionTypes.GET_PRODUCT_DETAILS_RESET:
-            return { product: { } }
+            console.log("Now its true i am in pr3")    
+        return { product: {} }
 
         default:
+            console.log("Now its true i am in pr4")  
             return state
     }
 
 } 
+
+// yah store se call hoga 

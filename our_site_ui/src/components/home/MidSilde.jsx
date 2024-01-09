@@ -1,7 +1,7 @@
 
 
 import { Box, styled } from "@mui/material";
-import Slide from "./Slid";
+import Slide from "./Slide";
 
 
 const Component = styled(Box)`

@@ -22,10 +22,11 @@ export const getProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.GET_PRODUCT_DETAILS_REQUEST })
         const { data } = await axios.get(`${URL}/product/${id}`);
-        dispatch({ type: actionTypes.GET_PRODUCT_DETAILS_SUCCESS, payload: data })
+        dispatch({ type: actionTypes.GET_PRODUCT_DETAILS_SUCCESS, payload: data })  // yaha se data ja raha payload me 
        
     } catch (error) {       
-        dispatch({ type: actionTypes.GET_PRODUCTS_FAIL, payload: error.response })      
+        dispatch({ type: actionTypes.GET_PRODUCTS_FAIL, payload: error.message })      
     }    
 }
 
+// yaha se jayega reduser ke pass

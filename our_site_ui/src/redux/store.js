@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import {thunk} from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
+import {cartReducer}  from './reducers/cartReducer'; 
 
 import {  getProductsReducer , getProductDetailsReducer } from './reducers/productReducer';
 
@@ -9,7 +9,8 @@ import {  getProductsReducer , getProductDetailsReducer } from './reducers/produ
 
 const reducer = combineReducers({
      getProducts : getProductsReducer,
-     getProductdetails : getProductDetailsReducer
+     getProductDetails : getProductDetailsReducer,
+     cart: cartReducer,
      
 });
 

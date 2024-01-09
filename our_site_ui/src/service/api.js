@@ -21,3 +21,13 @@ export const authenticateLogin = async (data) => {
         return error.response;
     }
 }
+
+
+export  const  payUsingRazorpay = async (data) => {
+    try {
+        let response = await axios.post(`${URL}/payment`, data);   
+        return response.data;
+    } catch (error) {
+        console.log('Error', error);
+    }
+}

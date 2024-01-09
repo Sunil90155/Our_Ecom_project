@@ -6,7 +6,7 @@ import Banner from "./Banner";
 import { Box, styled } from "@mui/material";
 import { getProducts } from '../../redux/action/productActions';
 import { useSelector,useDispatch } from 'react-redux';
-import Slide from './Slid';
+import Slide from './Slide';
 import MidSlide from './MidSilde';
 
 const Component = styled(Box)`

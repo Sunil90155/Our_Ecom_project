@@ -10,6 +10,7 @@ const Component = styled(Box)`
     justify-content: space-between;
     margin: 55px 130px 0 130px;
     overflow-x: overlay;
+    
 `;
 
 const Container = styled(Box)`
@@ -27,6 +28,8 @@ const Text = styled(Typography)`
 const NavBar = () => {
 
     return (
+
+            <Box style ={{background:'#fff' }}  > 
 
         <Component>
             {
@@ -46,6 +49,8 @@ const NavBar = () => {
             }
 
         </Component>
+
+        </Box>
     )
 
 }
